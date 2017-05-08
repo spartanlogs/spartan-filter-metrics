@@ -55,7 +55,9 @@ func newMetricsFilter(options utils.InterfaceMap) (filters.Filter, error) {
 }
 
 func (f *MetricsFilter) setConfig(options utils.InterfaceMap) error {
-	if err := config.VerifySettings(options, metricsConfigSchema); err != nil {
+	var err error
+	options, err = config.VerifySettings(options, metricsConfigSchema)
+	if err != nil {
 		return err
 	}
 
